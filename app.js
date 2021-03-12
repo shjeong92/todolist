@@ -3,14 +3,14 @@ const mongoose = require("mongoose")
 const express = require("express");
 const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
-
+require('dotenv').config();
 const app = express();
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
-const uri = "mongodb+srv://sang-admin:Azonnet7328@cluster0.au4be.mongodb.net/todolistDB";
-const url = 'mongodb://localhost:27017/todolistDB';
+const uri = process.env.DB_NONLOCAL;
+const url = process.env.DB_LOCAL;
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
